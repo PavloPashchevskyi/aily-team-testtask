@@ -1,0 +1,24 @@
+AppBundle\Entity\Link:
+    type: entity
+    table: link
+    repositoryClass: AppBundle\Entity\Repository\LinkRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        original:
+            type: string
+            length: 255
+        short:
+            type: string
+            length: 255
+        lifetimeTo:
+            type: datetime
+            nullable: true
+        active:
+            type: boolean
+            options:
+                default: false
