@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Links list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Original</th>
+                <th>Short</th>
+                <th>Lifetimeto</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for link in links %}
+            <tr>
+                <td><a href="{{ path('link_show', { 'id': link.id }) }}">{{ link.id }}</a></td>
+                <td>{{ link.original }}</td>
+                <td>{{ link.short }}</td>
+                <td>{% if link.lifetimeTo %}{{ link.lifetimeTo|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if link.active %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('link_show', { 'id': link.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('link_edit', { 'id': link.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('link_new') }}">Create a new link</a>
+        </li>
+    </ul>
+{% endblock %}

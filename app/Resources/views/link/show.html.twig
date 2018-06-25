@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Link</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ link.id }}</td>
+            </tr>
+            <tr>
+                <th>Original</th>
+                <td>{{ link.original }}</td>
+            </tr>
+            <tr>
+                <th>Short</th>
+                <td>{{ link.short }}</td>
+            </tr>
+            <tr>
+                <th>Lifetimeto</th>
+                <td>{% if link.lifetimeTo %}{{ link.lifetimeTo|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if link.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('link_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('link_edit', { 'id': link.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
