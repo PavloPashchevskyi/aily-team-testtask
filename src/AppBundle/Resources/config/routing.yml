@@ -1,0 +1,3 @@
+app_link:
+    resource: "@AppBundle/Resources/config/routing/link.yml"
+    prefix: /link
