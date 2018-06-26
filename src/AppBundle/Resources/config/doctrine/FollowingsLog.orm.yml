@@ -1,0 +1,25 @@
+AppBundle\Entity\FollowingsLog:
+    type: entity
+    table: followings_log
+    repositoryClass: AppBundle\Entity\Repository\FollowingsLogRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        followingDateTime:
+            type: datetime
+        referer:
+            type: string
+            length: 255
+        ip:
+            type: string
+            length: 30
+        browser:
+            type: string
+            length: 255
+    manyToOne:
+        link:
+            targetEntity: AppBundle\Entity\Link
