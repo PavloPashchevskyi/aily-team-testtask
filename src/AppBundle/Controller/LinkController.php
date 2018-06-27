@@ -22,7 +22,7 @@ class LinkController extends Controller
 
         $links = $em->getRepository('AppBundle:Link')->findAll();
 
-        return $this->render('link/index.html.twig', array(
+        return $this->render('@App/Link/index.html.twig', array(
             'links' => $links,
         ));
     }
@@ -45,7 +45,7 @@ class LinkController extends Controller
             return $this->redirectToRoute('link_show', array('id' => $link->getId()));
         }
 
-        return $this->render('link/new.html.twig', array(
+        return $this->render('@App/Link/new.html.twig', array(
             'link' => $link,
             'form' => $form->createView(),
         ));
@@ -59,7 +59,7 @@ class LinkController extends Controller
     {
         $deleteForm = $this->createDeleteForm($link);
 
-        return $this->render('link/show.html.twig', array(
+        return $this->render('@App/Link/show.html.twig', array(
             'link' => $link,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -81,7 +81,7 @@ class LinkController extends Controller
             return $this->redirectToRoute('link_edit', array('id' => $link->getId()));
         }
 
-        return $this->render('link/edit.html.twig', array(
+        return $this->render('@App/Link/edit.html.twig', array(
             'link' => $link,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

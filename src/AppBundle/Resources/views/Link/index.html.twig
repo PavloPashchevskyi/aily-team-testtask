@@ -18,8 +18,8 @@
         {% for link in links %}
             <tr>
                 <td><a href="{{ path('link_show', { 'id': link.id }) }}">{{ link.id }}</a></td>
-                <td>{{ link.original }}</td>
-                <td>{{ link.short }}</td>
+                <td><a href="{{ link.original }}" target="_blank" data-shortlink="false">{{ link.original }}</a></td>
+                <td><a href="{{ link.short }}" target="_blank" data-shortlink="true">{{ link.short }}</a></td>
                 <td>{% if link.lifetimeTo %}{{ link.lifetimeTo|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if link.active %}Yes{% else %}No{% endif %}</td>
                 <td>
