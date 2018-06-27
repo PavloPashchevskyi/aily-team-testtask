@@ -167,4 +167,12 @@ class FollowingsLog
     {
         return $this->link;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setFollowingDateTimeValue()
+    {
+        $this->followingDateTime = new \DateTime();
+    }
 }
