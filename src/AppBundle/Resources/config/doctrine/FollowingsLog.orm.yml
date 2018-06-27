@@ -23,3 +23,5 @@ AppBundle\Entity\FollowingsLog:
     manyToOne:
         link:
             targetEntity: AppBundle\Entity\Link
+    lifecycleCallbacks:
+        prePersist: [setFollowingDateTimeValue]
