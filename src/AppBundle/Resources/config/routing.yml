@@ -1,3 +1,6 @@
 app_link:
     resource: "@AppBundle/Resources/config/routing/link.yml"
     prefix: /link
+app_following_log:
+    resource: "@AppBundle/Resources/config/routing/followings_log.yml"
+    prefix: /followings-log

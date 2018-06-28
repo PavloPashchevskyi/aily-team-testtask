@@ -1,0 +1,4 @@
+followings_log_add:
+    path: /add
+    defaults: {_controller: AppBundle:FollowingsLog:add}
+    methods: [GET, POST]
