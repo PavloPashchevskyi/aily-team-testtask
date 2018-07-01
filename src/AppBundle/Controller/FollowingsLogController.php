@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\FollowingsLog;
 use AppBundle\Entity\Link;
+use AppBundle\Entity\Repository\FollowingsLogRepository;
 use AppBundle\Entity\Repository\LinkRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,6 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FollowingsLogController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function addAction(Request $request)
     {
         //request options
@@ -66,6 +71,27 @@ class FollowingsLogController extends Controller
                 'error' => 'You have followed not by short link. Possibly, you pointed wrong URL in your AJaX query',
             ],
             404
+        );
+    }
+
+    /**
+     * @param Link $link
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewLinkStatisticsAction(Link $link)
+    {
+        /** @var ObjectManager $em */
+        $em = $this->getDoctrine()->getManager();
+        /** @var FollowingsLogRepository $followingsLinkRepository */
+        $followingsLogRepository = $em->getRepository('AppBundle:FollowingsLog');
+        /** @var FollowingsLog $followingsLog */
+        $followingsLog = $followingsLogRepository->viewLinkStatistics($link);
+
+        return $this->render('@App/FollowingsLog/viewLinkStatistics.html.twig',
+            [
+                'shortLink' => $link->getShort(),
+                'followingsLog' => $followingsLog,
+            ]
         );
     }
 }

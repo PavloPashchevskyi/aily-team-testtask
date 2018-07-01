@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Link followings statistics for {{ shortLink }}</h1>
+    <a href="{{ path('link_index') }}">Go to Links table</a>
+    <table>
+        <thead>
+            <tr>
+                <th>User IP</th>
+                <th>User Agent</th>
+                <th>Followings count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for followingsLogItem in followingsLog %}
+                <tr>
+                    <td>{{ followingsLogItem.ip }}</td>
+                    <td>{{ followingsLogItem.browser }}</td>
+                    <td>{{ followingsLogItem.followingsCount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('link_index') }}">Go to Links table</a>
+{% endblock %}

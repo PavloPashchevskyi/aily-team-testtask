@@ -2,3 +2,6 @@ followings_log_add:
     path: /add
     defaults: {_controller: AppBundle:FollowingsLog:add}
     methods: [GET, POST]
+followings_log_view_statistics:
+    path: /{id}/view-link-statistics
+    defaults: {_controller: AppBundle:FollowingsLog:viewLinkStatistics}
