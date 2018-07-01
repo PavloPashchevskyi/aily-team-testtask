@@ -21,4 +21,4 @@ link_edit:
 link_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Link:delete" }
-    methods:  DELETE
+    methods:  [GET]

@@ -57,11 +57,8 @@ class LinkController extends Controller
      */
     public function showAction(Link $link)
     {
-        $deleteForm = $this->createDeleteForm($link);
-
         return $this->render('@App/Link/show.html.twig', array(
             'link' => $link,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -71,7 +68,6 @@ class LinkController extends Controller
      */
     public function editAction(Request $request, Link $link)
     {
-        $deleteForm = $this->createDeleteForm($link);
         $editForm = $this->createForm('AppBundle\Form\LinkType', $link);
         $editForm->handleRequest($request);
 
@@ -84,7 +80,6 @@ class LinkController extends Controller
         return $this->render('@App/Link/edit.html.twig', array(
             'link' => $link,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -94,31 +89,10 @@ class LinkController extends Controller
      */
     public function deleteAction(Request $request, Link $link)
     {
-        $form = $this->createDeleteForm($link);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($link);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($link);
+        $em->flush();
 
         return $this->redirectToRoute('link_index');
-    }
-
-    /**
-     * Creates a form to delete a link entity.
-     *
-     * @param Link $link The link entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Link $link)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('link_delete', array('id' => $link->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 }
