@@ -23,5 +23,7 @@ AppBundle\Entity\FollowingsLog:
     manyToOne:
         link:
             targetEntity: AppBundle\Entity\Link
+            joinColumn:
+                onDelete: CASCADE
     lifecycleCallbacks:
         prePersist: [setFollowingDateTimeValue]
