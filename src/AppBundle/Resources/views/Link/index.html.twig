@@ -25,10 +25,16 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('link_show', { 'id': link.id }) }}">show</a>
+                            <a href="{{ path('link_show', { 'id': link.id }) }}">Show link separately</a>
                         </li>
                         <li>
-                            <a href="{{ path('link_edit', { 'id': link.id }) }}">edit</a>
+                            <a href="{{ path('link_edit', { 'id': link.id }) }}">Edit link</a>
+                        </li>
+                        <li>
+                            {% include '@App/Link/delete_form.html.twig' with {'link': link} %}
+                        </li>
+                        <li>
+                            <a href="{{ path('followings_log_view_statistics', {'id': link.id}) }}">View statistics</a>
                         </li>
                     </ul>
                 </td>
