@@ -3,19 +3,20 @@
 {% block body %}
     <h1>Links list</h1>
 
+    <h2>Total links count: {{ paginatedLinks.getTotalItemCount }}</h2>
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Original</th>
-                <th>Short</th>
-                <th>Lifetimeto</th>
-                <th>Active</th>
+                <th>{{ knp_pagination_sortable(paginatedLinks, 'Id', 'l.id') }}</th>
+                <th>{{ knp_pagination_sortable(paginatedLinks, 'Original', 'l.original') }}</th>
+                <th>{{ knp_pagination_sortable(paginatedLinks, 'Short', 'l.short') }}</th>
+                <th>{{ knp_pagination_sortable(paginatedLinks, 'LifetimeTo', 'l.lifetimeTo') }}</th>
+                <th>{{ knp_pagination_sortable(paginatedLinks, 'Active', 'l.active') }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for link in links %}
+        {% for link in paginatedLinks %}
             <tr>
                 <td><a href="{{ path('link_show', { 'id': link.id }) }}">{{ link.id }}</a></td>
                 <td><a href="{{ link.original }}" target="_blank" data-shortlink="false">{{ link.original }}</a></td>
@@ -42,6 +43,10 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div>
+        {{ knp_pagination_render(paginatedLinks) }}
+    </div>
 
     <ul>
         <li>

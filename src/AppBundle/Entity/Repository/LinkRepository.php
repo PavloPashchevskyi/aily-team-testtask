@@ -9,4 +9,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class LinkRepository extends EntityRepository
 {
+    /**
+     * @return \Doctrine\ORM\Query
+     */
+    public function getFindAllQueryHandler()
+    {
+        return $this->createQueryBuilder('l')->getQuery();
+    }
 }

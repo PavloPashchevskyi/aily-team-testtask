@@ -16,14 +16,16 @@ class LinkController extends Controller
      * Lists all link entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $links = $em->getRepository('AppBundle:Link')->findAll();
+        $linksQuery = $em->getRepository('AppBundle:Link')->getFindAllQueryHandler();
 
+        $paginator = $this->get('knp_paginator');
+        $paginatedLinks = $paginator->paginate($linksQuery, $request->query->getInt('page', 1), 20);
         return $this->render('@App/Link/index.html.twig', array(
-            'links' => $links,
+            'paginatedLinks' => $paginatedLinks,
         ));
     }
 
