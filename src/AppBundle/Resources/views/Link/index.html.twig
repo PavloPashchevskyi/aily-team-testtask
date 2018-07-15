@@ -4,15 +4,15 @@
     <h1>Links list</h1>
 
     <h2>Total links count: {{ paginatedLinks.getTotalItemCount }}</h2>
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(paginatedLinks, 'Id', 'l.id') }}</th>
-                <th>{{ knp_pagination_sortable(paginatedLinks, 'Original', 'l.original') }}</th>
-                <th>{{ knp_pagination_sortable(paginatedLinks, 'Short', 'l.short') }}</th>
-                <th>{{ knp_pagination_sortable(paginatedLinks, 'LifetimeTo', 'l.lifetimeTo') }}</th>
-                <th>{{ knp_pagination_sortable(paginatedLinks, 'Active', 'l.active') }}</th>
-                <th>Actions</th>
+                <th scope="col">{{ knp_pagination_sortable(paginatedLinks, 'Id', 'l.id') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(paginatedLinks, 'Original', 'l.original') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(paginatedLinks, 'Short', 'l.short') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(paginatedLinks, 'LifetimeTo', 'l.lifetimeTo') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(paginatedLinks, 'Active', 'l.active') }}</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,35 +24,35 @@
                 <td>{% if link.lifetimeTo %}{{ link.lifetimeTo|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if link.active %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('link_show', { 'id': link.id }) }}">Show link separately</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('link_edit', { 'id': link.id }) }}">Edit link</a>
-                        </li>
-                        <li>
+                    <div>
+                        <div>
+                            <a class="btn btn-info" href="{{ path('link_show', { 'id': link.id }) }}">Show link separately</a>
+                        </div>
+                        <div>
+                            <a class="btn btn-warning" href="{{ path('link_edit', { 'id': link.id }) }}">Edit link</a>
+                        </div>
+                        <div>
                             {% include '@App/Link/delete_form.html.twig' with {'link': link} %}
-                        </li>
-                        <li>
-                            <a href="{{ path('followings_log_view_statistics', {'id': link.id}) }}">View statistics</a>
-                        </li>
-                    </ul>
+                        </div>
+                        <div>
+                            <a class="btn btn-info" href="{{ path('followings_log_view_statistics', {'id': link.id}) }}">View statistics</a>
+                        </div>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <div>
+    <div class="pagination">
         {{ knp_pagination_render(paginatedLinks) }}
     </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('link_new') }}">Create a new link</a>
-        </li>
-    </ul>
+    <div>
+        <div>
+            <a class="btn btn-primary" href="{{ path('link_new') }}">Create a new link</a>
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

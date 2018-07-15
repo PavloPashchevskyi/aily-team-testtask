@@ -3,42 +3,42 @@
 {% block body %}
     <h1>Link</h1>
 
-    <table>
+    <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th scope="row">Id</th>
                 <td>{{ link.id }}</td>
             </tr>
             <tr>
-                <th>Original</th>
+                <th scope=row">Original</th>
                 <td><a href="{{ link.original }}" target="_blank" data-shortlink="false">{{ link.original }}</a></td>
             </tr>
             <tr>
-                <th>Short</th>
+                <th scope="row">Short</th>
                 <td><a href="{{ link.short }}" data-shortlink="true">{{ link.short }}</a></td>
             </tr>
             <tr>
-                <th>Lifetimeto</th>
+                <th scope="row">Lifetimeto</th>
                 <td>{% if link.lifetimeTo %}{{ link.lifetimeTo|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Active</th>
+                <th scope="row">Active</th>
                 <td>{% if link.active %}Yes{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('link_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('link_edit', { 'id': link.id }) }}">Edit</a>
-        </li>
-        <li>
+    <div class="row">
+        <div class="col-md-4">
+            <a class="btn btn-info" href="{{ path('link_index') }}">Back to the list</a>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-warning" href="{{ path('link_edit', { 'id': link.id }) }}">Edit</a>
+        </div>
+        <div class="col-md-4">
             {% include '@App/Link/delete_form.html.twig' with {'link': link} %}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

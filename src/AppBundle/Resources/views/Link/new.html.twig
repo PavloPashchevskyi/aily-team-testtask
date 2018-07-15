@@ -8,9 +8,9 @@
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('link_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-info" href="{{ path('link_index') }}">Back to the list</a>
+        </div>
+    </div>
 {% endblock %}

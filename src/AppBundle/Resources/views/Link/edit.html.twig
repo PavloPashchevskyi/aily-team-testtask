@@ -8,12 +8,12 @@
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('link_index') }}">Back to the list</a>
-        </li>
-        <li>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-info" href="{{ path('link_index') }}">Back to the list</a>
+        </div>
+        <div class="col-md-6">
             {% include '@App/Link/delete_form.html.twig' with {'link': link} %}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}
