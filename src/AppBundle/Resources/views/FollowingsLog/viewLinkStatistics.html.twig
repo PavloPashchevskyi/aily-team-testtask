@@ -3,16 +3,17 @@
 {% block body %}
     <h1>Link followings statistics for {{ shortLink }}</h1>
     <a href="{{ path('link_index') }}" class="btn btn-link">Go to Links table</a>
+    <h2>Total results count: {{ paginatedFollowingsLog.getTotalItemCount }}</h2>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">User IP</th>
-                <th scope="col">User Agent</th>
+                <th scope="col">{{ knp_pagination_sortable(paginatedFollowingsLog, 'User IP', 'fl.ip') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(paginatedFollowingsLog, 'User Agent', 'fl.browser') }}</th>
                 <th scope="col">Followings count</th>
             </tr>
         </thead>
         <tbody>
-            {% for followingsLogItem in followingsLog %}
+            {% for followingsLogItem in paginatedFollowingsLog %}
                 <tr>
                     <td>{{ followingsLogItem.ip }}</td>
                     <td>{{ followingsLogItem.browser }}</td>
@@ -21,5 +22,8 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="pagination">
+        {{ knp_pagination_render(paginatedFollowingsLog) }}
+    </div>
     <a href="{{ path('link_index') }}" class="btn btn-link">Go to Links table</a>
 {% endblock %}

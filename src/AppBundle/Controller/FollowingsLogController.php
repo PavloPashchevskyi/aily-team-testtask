@@ -7,6 +7,8 @@ use AppBundle\Entity\Link;
 use AppBundle\Entity\Repository\FollowingsLogRepository;
 use AppBundle\Entity\Repository\LinkRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Query;
+use Knp\Component\Pager\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,19 +80,31 @@ class FollowingsLogController extends Controller
      * @param Link $link
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewLinkStatisticsAction(Link $link)
+    public function viewLinkStatisticsAction(Link $link, Request $request)
     {
         /** @var ObjectManager $em */
         $em = $this->getDoctrine()->getManager();
         /** @var FollowingsLogRepository $followingsLinkRepository */
         $followingsLogRepository = $em->getRepository('AppBundle:FollowingsLog');
-        /** @var FollowingsLog $followingsLog */
-        $followingsLog = $followingsLogRepository->viewLinkStatistics($link);
+        /** @var Query $followingsLogQuery */
+        $followingsLogQuery = $followingsLogRepository->viewLinkStatistics($link);
+        /** @var Paginator $paginator */
+        $paginator = $this->get('knp_paginator');
+        $paginator->setDefaultPaginatorOptions(
+            [
+                'distinct' => false,
+            ]
+        );
+        $paginatedFollowingsLog = $paginator->paginate(
+            $followingsLogQuery,
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('@App/FollowingsLog/viewLinkStatistics.html.twig',
             [
                 'shortLink' => $link->getShort(),
-                'followingsLog' => $followingsLog,
+                'paginatedFollowingsLog' => $paginatedFollowingsLog,
             ]
         );
     }

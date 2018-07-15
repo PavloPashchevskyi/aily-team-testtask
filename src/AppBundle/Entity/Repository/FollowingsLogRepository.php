@@ -20,6 +20,6 @@ class FollowingsLogRepository extends EntityRepository
             ->setParameter('link', $link->getShort())
         ;
 
-        return $query->getQuery()->getResult();
+        return $query->getQuery();
     }
 }
